@@ -1,0 +1,5 @@
+CodeBlocks profiling information (0 total cycles):
+------------------ GEProfiler ----------------------
+GE list count: 0
+Texture load count: 0, average NaN per GE list
+Copy GE to memory: 0, average NaN per GE list
