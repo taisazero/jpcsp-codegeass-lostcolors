@@ -178,7 +178,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener, Componen
     public static int[] a_skippingColors = { -48060, -10205954, -12227586, -13548123, -4629957, -33724 };
     public static boolean soundHelper = false;
     public static final int[] a_blueInterfaceScenes = { 59, 120, 144, 223, 227, 
-        248, 253, 412, 419, 421, 423, 425, 444, 459, 467 };
+        248, 253, 412, 419, 421, 423, 425, 444, 459, 467, 472 };
     public static final int[] a_redInterfaceScenes = { 69, 83, 96, 97, 149, 154 };
     private static boolean init = false; // change to false
     private static javax.sound.sampled.Clip clip;
