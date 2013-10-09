@@ -1505,6 +1505,14 @@ public class alvaroDialogShower extends JPanel {
                     waitForVideoToPass();
                 }
                 break;
+                
+            case 483:
+                if (this.scene.getIndex() == 5) {
+                    waitForVideoToPass();
+                } else if (this.scene.getIndex() == 14 || this.scene.getIndex() == 16) {
+                    alvaroJapTextChecker.ignoreGUIError();
+                }
+                break;
             default:
                 break;
         }
