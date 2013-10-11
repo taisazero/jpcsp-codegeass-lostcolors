@@ -1412,6 +1412,58 @@ public class alvaroDialogShower extends JPanel {
                     sceDisplay.activate();
                 }
                 break;
+            case 251:
+                // This scene needs another image comparation due to the text 
+                // on index 31 being different from PurebredFaction's path.
+                if (this.scene.getIndex() == 31) {
+                    // deactivate display
+                    sceDisplay.deactivate();
+                    // reset the recognition procedure
+                    alvaroJapTextChecker.forceResetRecog(4);
+                    
+                    // Wait until the text is fully shown (waits for the red arrow to appear)
+                    this.waitUntilSkipper();
+                    
+                    try {
+                        // get images for comparation
+                        String specialImagePath = "CodeGeassSpeech/"
+                                + "SceneIdentificator/S251SI01.png";
+                        BufferedImage currentEmulatorImage = MainGUI.a_es.extract(), 
+                                specialImagecCase = ImageIO.read(
+                                       new File(specialImagePath));
+                        
+                        // compare images
+                        /*
+                         * If they are equal we tell the script that it's sv value == 1 
+                         * (change to purebred faction path's text)
+                         * If they are not equal we tell the script that sv value == 0
+                         * (telling he is supposed to continue as planned)
+                         */
+                        if (CGSMScene.equalImages(currentEmulatorImage, specialImagecCase)) {
+                            this.sendCommandToScript("sv = 1;");
+                        } else {
+                            this.sendCommandToScript("sv = 0;");
+                        }
+                        // we wait now until the sv is back to -1
+                        // SV == -1 proves that all changes are finished within 
+                        // the script and we are safe to call next().
+                        while (Integer.parseInt(this.currentActiveScript.getVar("sv")) != -1) {
+                            Thread.sleep(100);
+                        }
+                        // reset view port
+                        if (MainGUI.currentViewPortNr != 1) {
+                            MainGUI.instance.resizeView(MainGUI.currentViewPortNr);
+                        }
+                        sceDisplay.activate();
+                        // we call for the next and reset the background.
+                        this.initBacks();
+                        next();
+                    } catch (IOException e) {
+                        MainGUI.a_debug.escreveNaConsola("[IO EXCEPTION] - Error while treating scene 251's special case.");
+                    } catch (InterruptedException e) {
+                        MainGUI.a_debug.escreveNaConsola("[INTERRUPTED EXCEPTION] - Error while treating scene 251's special case.");
+                    }
+                }
             case 379:
                 if (this.scene.getIndex() == 94) {
                     Controller.getInstance().stopAutoSkip();
@@ -1513,8 +1565,28 @@ public class alvaroDialogShower extends JPanel {
                     alvaroJapTextChecker.ignoreGUIError();
                 }
                 break;
+            case 488:
+                if (this.scene.getIndex() == 26) {
+                    waitForVideoToPass();
+                }
+                break;
             default:
                 break;
+        }
+    }
+    
+    private void sendCommandToScript(String command) {
+        CGSMScript script = this.getScript();
+        if (script != null && script.isRunning()) {
+            boolean concurrentError;
+            do {
+                concurrentError = false;
+                try {
+                    script.interpretNativeCommand(command, null);
+                } catch (ConcurrentModificationException e) {
+                    concurrentError = true;
+                }
+            } while (concurrentError);
         }
     }
     
