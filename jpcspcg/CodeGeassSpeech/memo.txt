@@ -24,7 +24,7 @@ Scene 383 does not have images.
 
 scene 326 precisa de tratamento SV a partir do 19 YOU.
 
-Scene 489 has no images. (This is the last scene where you speak to Jeremiah (Britannia path) by your choice (after the ending)).
+Scene 489 has no images. (DONE)
 
 cores de loading: 
 

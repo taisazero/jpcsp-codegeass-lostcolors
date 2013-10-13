@@ -1,13 +1,13 @@
 /*
-This file is part of jpcspCG.
+ This file is part of jpcspCG.
 
-JPCSPCG is and addition to the jpcsp software: you can redistribute it 
-and/or modify it under the terms of the GNU General Public License as published 
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+ JPCSPCG is and addition to the jpcsp software: you can redistribute it 
+ and/or modify it under the terms of the GNU General Public License as published 
+ by the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-You should have received a copy of the GNU General Public License
-along with Jpcsp.  If not, see <http://www.gnu.org/licenses/>.
+ You should have received a copy of the GNU General Public License
+ along with Jpcsp.  If not, see <http://www.gnu.org/licenses/>.
  */
 package jpcsp;
 
@@ -39,7 +39,7 @@ import jpcsp.HLE.modules150.sceMpeg;
  * @author LelouchZero
  */
 public class alvaroDialogShower extends JPanel {
-    
+
     // Changing Vars
     private CGSMScene scene;
     private int sceneIndex;
@@ -54,11 +54,9 @@ public class alvaroDialogShower extends JPanel {
     private boolean acquired;
     private boolean isPaiting = false;
     private boolean blockPaint = false;
-    
     // CONST
     private static final int fontSizeNormal = 13;
     private static final int fontType = Font.PLAIN;
-    
     // NON-CONST STATIC
     private static String sv_lastValue = "-1";
     private static Font f;
@@ -69,7 +67,7 @@ public class alvaroDialogShower extends JPanel {
     public boolean isPaused() {
         return paused;
     }
-    
+
     // takes care of the english text appearing letter by letter over time.
     private class AnimatedDialog implements Runnable {
 
@@ -158,11 +156,11 @@ public class alvaroDialogShower extends JPanel {
             }
             return result;
         }
-        
+
         public String getFirstString() {
             return this.dialog.peek();
         }
-        
+
         public void setStartIndex(int index) {
             this.showingLength = index;
         }
@@ -200,7 +198,6 @@ public class alvaroDialogShower extends JPanel {
                         //Thread.sleep(MainGUI.getFPSV());
                         wait();
                     } catch (InterruptedException e) {
-                        
                     }
                 }
                 if (!MainGUI.a_ep.isVisible()) {
@@ -268,7 +265,7 @@ public class alvaroDialogShower extends JPanel {
         this.textRecognThread = this.constructTextRecognThread();
         this.animDialog = new AnimatedDialog();
         backgroundGenerator = new BackgroundGenerator();
-        
+
         initChoiceBacks();
         //backgroundThread = this.generateBackgroundThread();
         try {
@@ -278,7 +275,7 @@ public class alvaroDialogShower extends JPanel {
         }
         System.gc(); // force freeing up memory
     }
-    
+
     public static void adjustToViewPort() {
         f = f.deriveFont((float) (fontSizeNormal * MainGUI.currentViewPortNr));
         alvaroEventPanel.adjustFont();
@@ -450,7 +447,7 @@ public class alvaroDialogShower extends JPanel {
         if (MainGUI.currentViewPortNr != 1) {
             MainGUI.instance.resizeView(1);
         }
-        
+
         do {
             try {
                 Thread.sleep(100);
@@ -757,7 +754,6 @@ public class alvaroDialogShower extends JPanel {
         this.current = null;
         System.gc(); // release memory
     }
-    
 
     @Override
     public void paint(Graphics g) {
@@ -772,14 +768,14 @@ public class alvaroDialogShower extends JPanel {
             g2D.drawImage(this.background02, 0, 0, 694, super.getHeight(), this);
         }
         if (isMenuScene) {
-                g2D.drawImage(this.background, 71 * MainGUI.currentViewPortNr, 
-                        0, 78 * MainGUI.currentViewPortNr, 
-                        this.background.getHeight(this) * MainGUI.currentViewPortNr,
-                        this);
+            g2D.drawImage(this.background, 71 * MainGUI.currentViewPortNr,
+                    0, 78 * MainGUI.currentViewPortNr,
+                    this.background.getHeight(this) * MainGUI.currentViewPortNr,
+                    this);
         } else {
-            g2D.drawImage(this.background, 14 * MainGUI.currentViewPortNr, 0, 
-                    78 * MainGUI.currentViewPortNr, 
-                    this.background.getHeight(this) * MainGUI.currentViewPortNr, 
+            g2D.drawImage(this.background, 14 * MainGUI.currentViewPortNr, 0,
+                    78 * MainGUI.currentViewPortNr,
+                    this.background.getHeight(this) * MainGUI.currentViewPortNr,
                     this);
         }
         paintText(g2D);
@@ -897,13 +893,14 @@ public class alvaroDialogShower extends JPanel {
         }
         return this.scene.getNumberOfEvents() + this.scene.getNumberOfSpeeches() - 1 == this.scene.getIndex();
     }
-
     /**
-     * This variable is used to pass information from a script to another script (This is needed on scene 367)
+     * This variable is used to pass information from a script to another script
+     * (This is needed on scene 367)
      */
     private static String[] AUX_SCENE_SCRIPT_INFO;
+
     /**
-     * Check if a particular scene in a particular index has a treatment for the 
+     * Check if a particular scene in a particular index has a treatment for the
      * Japanese Text Checker.
      */
     public void checkIfHasTreatment() {
@@ -968,14 +965,14 @@ public class alvaroDialogShower extends JPanel {
                 }
                 break;
             case 83:
-                if (scene.getIndex() == 19 || scene.getIndex() == 21 || 
-                        scene.getIndex() == 30 || scene.getIndex() == 32 || 
-                        scene.getIndex() == 33 || scene.getIndex() == 40 || 
-                        scene.getIndex() == 41 ||  scene.getIndex() == 42 ) {
+                if (scene.getIndex() == 19 || scene.getIndex() == 21
+                        || scene.getIndex() == 30 || scene.getIndex() == 32
+                        || scene.getIndex() == 33 || scene.getIndex() == 40
+                        || scene.getIndex() == 41 || scene.getIndex() == 42) {
                     alvaroJapTextChecker.ignoreGUIError();
                 }
                 break;
-                // 22 e 23
+            // 22 e 23
             case 96:
                 if (this.scene.getIndex() == 22 || this.scene.getIndex() == 23) {
                     forceSkipOne();
@@ -989,11 +986,11 @@ public class alvaroDialogShower extends JPanel {
                 }
                 break;
             case 99:
-                if (this.scene.getIndex() == 93 || this.scene.getIndex() == 100 ||
-                        this.scene.getIndex() == 120 || this.scene.getIndex() == 136 ||
-                        this.scene.getIndex() == 137) {
+                if (this.scene.getIndex() == 93 || this.scene.getIndex() == 100
+                        || this.scene.getIndex() == 120 || this.scene.getIndex() == 136
+                        || this.scene.getIndex() == 137) {
                     forceSkipOne();
-                } 
+                }
                 break;
             case 101:
                 if (this.scene.getIndex() == 2) {
@@ -1079,14 +1076,14 @@ public class alvaroDialogShower extends JPanel {
                 } else if (this.scene.getIndex() == 71) {
                     alvaroDebugger.activateLoadingDebugging();
                 } else if (this.scene.getIndex() > 71) {
-                    if (this.scene.getIndex() == 90 || 
-                            this.scene.getIndex() == 92 ||
-                            this.scene.getIndex() == 96 ||
-                            this.scene.getIndex() == 101 || 
-                            this.scene.getIndex() == 104 || 
-                            this.scene.getIndex() == 111 ||
-                            this.scene.getIndex() == 112 ||
-                            this.scene.getIndex() == 113) {
+                    if (this.scene.getIndex() == 90
+                            || this.scene.getIndex() == 92
+                            || this.scene.getIndex() == 96
+                            || this.scene.getIndex() == 101
+                            || this.scene.getIndex() == 104
+                            || this.scene.getIndex() == 111
+                            || this.scene.getIndex() == 112
+                            || this.scene.getIndex() == 113) {
                         alvaroJapTextChecker.ignoreGUIError();
                     } else {
                         if (sv_lastValue.equals("0")) {
@@ -1110,10 +1107,10 @@ public class alvaroDialogShower extends JPanel {
                     Controller.getInstance().stopAutoSkip();
                 } else if (this.scene.getIndex() == 34) {
                     stopEverythingUntilLoadingIsOver(2, -1);
-                } else if (this.scene.getIndex() == 46 || 
-                        this.scene.getIndex() == 57 || 
-                        this.scene.getIndex() == 58 || 
-                        this.scene.getIndex() == 72) {
+                } else if (this.scene.getIndex() == 46
+                        || this.scene.getIndex() == 57
+                        || this.scene.getIndex() == 58
+                        || this.scene.getIndex() == 72) {
                     alvaroJapTextChecker.ignoreGUIError();
                 } else if (this.scene.getIndex() == 68) {
                     Controller.getInstance().stopAutoSkip();
@@ -1169,10 +1166,10 @@ public class alvaroDialogShower extends JPanel {
                     Controller.getInstance().stopAutoSkip();
                 } else if (this.scene.getIndex() == 105) {
                     waitForVideoToPass();
-                } else if (this.scene.getIndex() == 84 || 
-                        this.scene.getIndex() == 112 || 
-                        this.scene.getIndex() == 131 ||
-                        this.scene.getIndex() == 132) {
+                } else if (this.scene.getIndex() == 84
+                        || this.scene.getIndex() == 112
+                        || this.scene.getIndex() == 131
+                        || this.scene.getIndex() == 132) {
                     alvaroJapTextChecker.ignoreGUIError();
                 } else if (this.scene.getIndex() == 135) {
                     Controller.getInstance().stopAutoSkip();
@@ -1216,10 +1213,10 @@ public class alvaroDialogShower extends JPanel {
                 }
                 break;
             case 226:
-                if (this.scene.getIndex() == 51 || 
-                        this.scene.getIndex() == 100 || 
-                        this.scene.getIndex() == 103 || 
-                        this.scene.getIndex() == 107) {
+                if (this.scene.getIndex() == 51
+                        || this.scene.getIndex() == 100
+                        || this.scene.getIndex() == 103
+                        || this.scene.getIndex() == 107) {
                     alvaroJapTextChecker.ignoreGUIError();
                 }
                 if (this.scene.getIndex() == 30) {
@@ -1307,14 +1304,14 @@ public class alvaroDialogShower extends JPanel {
             case 227:
                 if (this.scene.getIndex() == 176) {
                     stopEverythingUntilLoadingIsOver(0, 4);
-                } else if (this.scene.getIndex() == 295 || 
-                        this.scene.getIndex() == 301 ||
-                        this.scene.getIndex() == 304 ||
-                        this.scene.getIndex() == 320 ||
-                        this.scene.getIndex() == 322 ||
-                        this.scene.getIndex() == 323 ||
-                        this.scene.getIndex() == 325 ||
-                        this.scene.getIndex() == 329) {
+                } else if (this.scene.getIndex() == 295
+                        || this.scene.getIndex() == 301
+                        || this.scene.getIndex() == 304
+                        || this.scene.getIndex() == 320
+                        || this.scene.getIndex() == 322
+                        || this.scene.getIndex() == 323
+                        || this.scene.getIndex() == 325
+                        || this.scene.getIndex() == 329) {
                     alvaroJapTextChecker.ignoreGUIError();
                 }
                 break;
@@ -1362,7 +1359,7 @@ public class alvaroDialogShower extends JPanel {
                             currentColor = MainGUI.a_es.getSpecifiedPixelColor(13, 135);
                             Thread.sleep(MainGUI.getFPSV());
                         } while (currentColor.getRed() > 60 || currentColor.getBlue() > 60 || currentColor.getGreen() > 60);
-                        
+
                         MainGUI.a_debug.escreveNaConsola("Waiting for text to come up.");
                         waitForText();
                         MainGUI.a_debug.escreveNaConsola("Waiting for gui to come up.");
@@ -1373,7 +1370,6 @@ public class alvaroDialogShower extends JPanel {
                         next();
                         sceDisplay.activate();
                     } catch (InterruptedException e) {
-                        
                     }
                 } else if (this.scene.getIndex() == 118 || this.scene.getIndex() == 151) {
                     alvaroJapTextChecker.ignoreGUIError();
@@ -1416,48 +1412,8 @@ public class alvaroDialogShower extends JPanel {
                 // This scene needs another image comparation due to the text 
                 // on index 31 being different from PurebredFaction's path.
                 if (this.scene.getIndex() == 31) {
-                    // deactivate display
-                    sceDisplay.deactivate();
-                    // reset the recognition procedure
-                    alvaroJapTextChecker.forceResetRecog(4);
-                    
-                    // Wait until the text is fully shown (waits for the red arrow to appear)
-                    this.waitUntilSkipper();
-                    
                     try {
-                        // get images for comparation
-                        String specialImagePath = "CodeGeassSpeech/"
-                                + "SceneIdentificator/S251SI01.png";
-                        BufferedImage currentEmulatorImage = MainGUI.a_es.extract(), 
-                                specialImagecCase = ImageIO.read(
-                                       new File(specialImagePath));
-                        
-                        // compare images
-                        /*
-                         * If they are equal we tell the script that it's sv value == 1 
-                         * (change to purebred faction path's text)
-                         * If they are not equal we tell the script that sv value == 0
-                         * (telling he is supposed to continue as planned)
-                         */
-                        if (CGSMScene.equalImages(currentEmulatorImage, specialImagecCase)) {
-                            this.sendCommandToScript("sv = 1;");
-                        } else {
-                            this.sendCommandToScript("sv = 0;");
-                        }
-                        // we wait now until the sv is back to -1
-                        // SV == -1 proves that all changes are finished within 
-                        // the script and we are safe to call next().
-                        while (Integer.parseInt(this.currentActiveScript.getVar("sv")) != -1) {
-                            Thread.sleep(100);
-                        }
-                        // reset view port
-                        if (MainGUI.currentViewPortNr != 1) {
-                            MainGUI.instance.resizeView(MainGUI.currentViewPortNr);
-                        }
-                        sceDisplay.activate();
-                        // we call for the next and reset the background.
-                        this.initBacks();
-                        next();
+                        this.compareSpecialImagesAndSendSV(new String[] { "CodeGeassSpeech/SceneIdentificator/S251SI01.png" });
                     } catch (IOException e) {
                         MainGUI.a_debug.escreveNaConsola("[IO EXCEPTION] - Error while treating scene 251's special case.");
                     } catch (InterruptedException e) {
@@ -1472,11 +1428,11 @@ public class alvaroDialogShower extends JPanel {
                 }
                 break;
             case 419:
-                if (this.scene.getIndex() == 35 || this.scene.getIndex() == 41 || 
-                        this.scene.getIndex() == 42 || this.scene.getIndex() == 45 || 
-                        this.scene.getIndex() == 46 || this.scene.getIndex() == 49 || 
-                        this.scene.getIndex() == 51 || this.scene.getIndex() == 52 || 
-                        this.scene.getIndex() == 53) {
+                if (this.scene.getIndex() == 35 || this.scene.getIndex() == 41
+                        || this.scene.getIndex() == 42 || this.scene.getIndex() == 45
+                        || this.scene.getIndex() == 46 || this.scene.getIndex() == 49
+                        || this.scene.getIndex() == 51 || this.scene.getIndex() == 52
+                        || this.scene.getIndex() == 53) {
                     alvaroJapTextChecker.ignoreGUIError();
                 }
                 break;
@@ -1493,14 +1449,14 @@ public class alvaroDialogShower extends JPanel {
             case 447:
                 if (this.scene.getIndex() == 81) {
                     stopEverythingUntilLoadingIsOver(1, 4);
-                } else if (this.scene.getIndex() == 88 || 
-                        this.scene.getIndex() == 92 || 
-                        this.scene.getIndex() == 93 || 
-                        this.scene.getIndex() == 101 || 
-                        this.scene.getIndex() == 214 || 
-                        this.scene.getIndex() == 234 || 
-                        this.scene.getIndex() == 237 || 
-                        this.scene.getIndex() == 241) {
+                } else if (this.scene.getIndex() == 88
+                        || this.scene.getIndex() == 92
+                        || this.scene.getIndex() == 93
+                        || this.scene.getIndex() == 101
+                        || this.scene.getIndex() == 214
+                        || this.scene.getIndex() == 234
+                        || this.scene.getIndex() == 237
+                        || this.scene.getIndex() == 241) {
                     alvaroJapTextChecker.ignoreGUIError();
                 }
                 break;
@@ -1510,8 +1466,21 @@ public class alvaroDialogShower extends JPanel {
                 }
                 if (this.scene.getIndex() == 200) {
                     waitForVideoToPass();
-                } 
+                }
                 break;
+            case 464:
+                // This scene needs another image comparation due to the text 
+                // on index 88 being different on two distinct ends.
+                if (this.scene.getIndex() == 88) {
+                    try {
+                        this.compareSpecialImagesAndSendSV(new String[]{"CodeGeassSpeech/SceneIdentificator/S464SI01.png"});
+                    } catch (IOException e) {
+                        MainGUI.a_debug.escreveNaConsola("[IO EXCEPTION] - Error while treating scene 464's special case.");
+                    } catch (InterruptedException e) {
+                        MainGUI.a_debug.escreveNaConsola("[INTERRUPTED EXCEPTION] - Error while treating scene 464's special case.");
+                    }
+
+                }
             case 467:
                 if (this.scene.getIndex() == 132) {
                     AUX_SCENE_SCRIPT_INFO = new String[3];
@@ -1545,19 +1514,19 @@ public class alvaroDialogShower extends JPanel {
                             concurrencyError = true;
                         }
                     } while (concurrencyError);
-                } else if (this.scene.getIndex() == 8 || 
-                        this.scene.getIndex() == 20 || 
-                        this.scene.getIndex() == 30 || 
-                        this.scene.getIndex() == 130 || 
-                        this.scene.getIndex() == 179 || 
-                        this.scene.getIndex() == 182 || 
-                        this.scene.getIndex() == 186) {
+                } else if (this.scene.getIndex() == 8
+                        || this.scene.getIndex() == 20
+                        || this.scene.getIndex() == 30
+                        || this.scene.getIndex() == 130
+                        || this.scene.getIndex() == 179
+                        || this.scene.getIndex() == 182
+                        || this.scene.getIndex() == 186) {
                     alvaroJapTextChecker.ignoreGUIError();
                 } else if (this.scene.getIndex() == 169) {
                     waitForVideoToPass();
                 }
                 break;
-                
+
             case 483:
                 if (this.scene.getIndex() == 5) {
                     waitForVideoToPass();
@@ -1574,7 +1543,7 @@ public class alvaroDialogShower extends JPanel {
                 break;
         }
     }
-    
+
     private void sendCommandToScript(String command) {
         CGSMScript script = this.getScript();
         if (script != null && script.isRunning()) {
@@ -1589,29 +1558,80 @@ public class alvaroDialogShower extends JPanel {
             } while (concurrentError);
         }
     }
-    
+
+    /**
+     * This function attempts to compare special images (S-X-SI-N, with X being 
+     * the scene and N the Number of the special image) and then updates the 
+     * current script's SV value based on the matching image. (0 if all images 
+     * failed to match, 1 if first image matched, 2 if second matched and so 
+     * on...)
+     * 
+     * @param imagesPath The images to be compared.
+     * @throws IOException In case there was an error reading the images
+     * @throws InterruptedException In case the Sleeping process was stopped.
+     */
+    private void compareSpecialImagesAndSendSV(String[] imagesPath) 
+            throws IOException, InterruptedException {
+        // deactivate display
+        sceDisplay.deactivate();
+        // reset the recognition procedure
+        alvaroJapTextChecker.forceResetRecog(4);
+
+        // Wait until the text is fully shown (waits for the red arrow to appear)
+        this.waitUntilSkipper();
+        
+        // get images for comparation and compare each them.
+        BufferedImage currentEmulatorImage = MainGUI.a_es.extract(),
+                currentSpecialImageCase;
+        int svValue = 0;
+        for (int k = 0; k < imagesPath.length; k++) {
+            currentSpecialImageCase = ImageIO.read(new File(imagesPath[k]));
+            if (CGSMScene.equalImages(currentEmulatorImage, currentSpecialImageCase)) {
+                svValue = k+1;
+                break;
+            }
+        }
+        
+        // Tell sv value to the script.
+        this.sendCommandToScript("sv = " + svValue + ";");
+        
+        // we wait now until the sv is back to -1
+        // SV == -1 proves that all changes are finished within 
+        // the script and we are safe to call next().
+        while (Integer.parseInt(this.currentActiveScript.getVar("sv")) != -1) {
+            Thread.sleep(100);
+        }
+        // reset view port
+        if (MainGUI.currentViewPortNr != 1) {
+            MainGUI.instance.resizeView(MainGUI.currentViewPortNr);
+        }
+        sceDisplay.activate();
+        // we call for the next and reset the background.
+        this.initBacks();
+        next();
+    }
+
     /*
      * // special case. on 114 it recognizes text when he shouldn't recognize.
-                    sceDisplay.deactivate();
-                    alvaroJapTextChecker.forceResetRecog(6);
-                    next();
-                    try {
-                        waitForText(); // wait for ghost text
-                        Thread.sleep(300);
-                        waitForText(); // recognize real text.
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(alvaroDialogShower.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    sceDisplay.activate();
+     sceDisplay.deactivate();
+     alvaroJapTextChecker.forceResetRecog(6);
+     next();
+     try {
+     waitForText(); // wait for ghost text
+     Thread.sleep(300);
+     waitForText(); // recognize real text.
+     } catch (InterruptedException ex) {
+     Logger.getLogger(alvaroDialogShower.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     sceDisplay.activate();
      * 
      * 
      */
-
     private void forceSkipOne() {
         alvaroJapTextChecker.forceResetRecog(-1);
         next();
     }
-    
+
     private void stopEverythingUntilLoadingIsOver(int nextInterface, int nrGUIError) {
         sceDisplay.deactivate();
         alvaroJapTextChecker.forceResetRecog(nrGUIError);
@@ -1663,7 +1683,7 @@ public class alvaroDialogShower extends JPanel {
         } catch (InterruptedException e) {
         }
     }
-    
+
     private void waitForVideoToPass() {
         Controller.disable();
         Controller.getInstance().stopAutoSkip();
