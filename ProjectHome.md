@@ -1,0 +1,1 @@
+This project's sole purpose is to emulator Code Geass Lost Colors game while showing English dialog. I don't own JPCSP project. Visit http://jpcsp.org/ for info.
